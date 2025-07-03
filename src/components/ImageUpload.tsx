@@ -6,7 +6,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Upload, X, Image } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export function ImageUpload() {
+interface ImageUploadProps {
+  onImageChange?: (imageUrl: string) => void;
+}
+
+export function ImageUpload({ onImageChange }: ImageUploadProps) {
   const [preview, setPreview] = useState<string>("/lovable-uploads/f57ec341-9d83-439f-979f-a7e2afe31258.png");
   const [isDragging, setIsDragging] = useState(false);
 
@@ -15,7 +19,11 @@ export function ImageUpload() {
     if (!file) return;
     
     const reader = new FileReader();
-    reader.onload = () => setPreview(reader.result as string);
+    reader.onload = () => {
+      const result = reader.result as string;
+      setPreview(result);
+      onImageChange?.(result);
+    };
     reader.readAsDataURL(file);
   };
 
@@ -37,13 +45,25 @@ export function ImageUpload() {
     if (!file || !file.type.startsWith('image/')) return;
     
     const reader = new FileReader();
-    reader.onload = () => setPreview(reader.result as string);
+    reader.onload = () => {
+      const result = reader.result as string;
+      setPreview(result);
+      onImageChange?.(result);
+    };
     reader.readAsDataURL(file);
   };
 
   const clearImage = () => {
     setPreview("");
+    onImageChange?.("");
   };
+
+  // Initialize with default image
+  useState(() => {
+    if (preview && onImageChange) {
+      onImageChange(preview);
+    }
+  });
 
   return (
     <div className="w-full space-y-4">
