@@ -1,12 +1,11 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { MessageSquare, Sparkles, Camera, Share2, Users, Zap, Globe, ArrowRight, CheckCircle } from "lucide-react";
+import { ArrowRight, CheckCircle, Camera, Share2, Sparkles, Users, Zap, Globe } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { SpaceBackground } from "@/components/SpaceBackground";
 
 const Landing = () => {
   const { signIn, isLoading } = useAuth();
@@ -95,13 +94,8 @@ const Landing = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white overflow-hidden">
-      {/* Animated Background */}
-      <div className="fixed inset-0 opacity-30">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20"></div>
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      </div>
+    <div className="min-h-screen relative overflow-hidden">
+      <SpaceBackground variant="nebula" intensity="medium" />
 
       <div className="relative z-10">
         {/* Header */}
@@ -109,7 +103,7 @@ const Landing = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-2 shadow-2xl">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-2 shadow-2xl backdrop-blur-xl">
                   <img 
                     src="/lovable-uploads/06b1a495-c027-47e3-b6ec-c83bcc38a50d.png" 
                     alt="Caption Genius Logo" 
@@ -118,25 +112,25 @@ const Landing = () => {
                 </div>
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
               </div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              <h1 className="text-2xl font-bold text-white">
                 Caption Genius
               </h1>
             </div>
-            <Badge variant="outline" className="border-blue-500/30 text-blue-400 bg-blue-500/10">
+            <div className="bg-blue-500/20 backdrop-blur-xl border border-blue-500/30 text-blue-300 px-4 py-2 rounded-full text-sm">
               Beta
-            </Badge>
+            </div>
           </div>
         </header>
 
         {/* Hero Section */}
         <section className="container mx-auto px-4 py-20 text-center">
-          <div className="max-w-4xl mx-auto">
-            <Badge className="mb-6 bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-300 border-blue-500/30">
-              🚀 Now with AI-Powered Analysis
-            </Badge>
+          <div className="max-w-5xl mx-auto">
+            <div className="inline-flex items-center gap-3 bg-blue-500/10 backdrop-blur-xl border border-blue-500/30 text-blue-300 px-6 py-3 rounded-full mb-8">
+              🚀 Now with Advanced AI Analysis
+            </div>
             
-            <h1 className="text-6xl md:text-7xl font-bold mb-8 leading-tight">
-              <span className="bg-gradient-to-r from-white via-blue-100 to-purple-100 bg-clip-text text-transparent">
+            <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight">
+              <span className="text-white">
                 Transform Your
               </span>
               <br />
@@ -145,7 +139,7 @@ const Landing = () => {
               </span>
             </h1>
             
-            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-2xl text-white/70 mb-16 max-w-4xl mx-auto leading-relaxed">
               Create engaging, professional captions that capture hearts and drive engagement. 
               Our AI understands your brand voice and crafts the perfect message every time.
             </p>

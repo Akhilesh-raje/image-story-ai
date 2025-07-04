@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,10 +9,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { AdvancedImageUpload } from "@/components/AdvancedImageUpload";
 import { CaptionHistoryManager } from "@/components/CaptionHistoryManager";
 import { useNavigate } from "react-router-dom";
-import { Sparkles, Upload, Hash, Wand2, Target, Users, Building, TrendingUp } from "lucide-react";
+import { Sparkles, Upload, Hash, Wand2, Target, Users, Building, TrendingUp, Zap, Brain, Globe2, Palette } from "lucide-react";
 import { generateMultipleAdvancedCaptions, saveCaptionToHistory, CaptionRequest } from "@/services/realCaptionService";
 import { useToast } from "@/hooks/use-toast";
-import { DynamicBackground } from "@/components/DynamicBackground";
+import { SpaceBackground } from "@/components/SpaceBackground";
 import { PremiumLoadingAnimation } from "@/components/PremiumLoadingAnimation";
 import { generateMultiplePremiumCaptions, EnhancedCaptionRequest } from "@/services/enhancedAIService";
 
@@ -31,8 +32,8 @@ const Dashboard = () => {
   const handleGenerate = async () => {
     if (!description && !imageUrl) {
       toast({
-        title: "Missing content",
-        description: "Please add a description or upload an image to generate captions.",
+        title: "Content Required",
+        description: "Please provide a description or upload an image to generate premium captions.",
         variant: "destructive",
       });
       return;
@@ -41,7 +42,6 @@ const Dashboard = () => {
     setIsGenerating(true);
     
     try {
-      // Enhanced loading stages
       const stages: Array<'analyzing' | 'trending' | 'generating' | 'optimizing'> = 
         ['analyzing', 'trending', 'generating', 'optimizing'];
       
@@ -63,7 +63,6 @@ const Dashboard = () => {
 
       const captions = await generateMultiplePremiumCaptions(request);
       
-      // Convert to compatible format
       const compatibleCaptions = captions.map(caption => ({
         caption: caption.caption,
         hashtags: caption.hashtags,
@@ -72,26 +71,24 @@ const Dashboard = () => {
         engagement_score: caption.engagement_score
       }));
       
-      // Save the best caption to history
       if (compatibleCaptions.length > 0) {
         await saveCaptionToHistory(compatibleCaptions[0], request as any);
       }
       
-      // Store results in localStorage for Results page
       localStorage.setItem('generatedCaptions', JSON.stringify(compatibleCaptions));
       localStorage.setItem('originalImage', imageUrl);
       localStorage.setItem('originalRequest', JSON.stringify(request));
       
       toast({
-        title: "🚀 Premium AI captions generated!",
-        description: `Generated ${captions.length} industry-grade captions with ${Math.round(captions[0]?.engagement_score || 90)}% engagement potential.`,
+        title: "🚀 Premium AI Captions Generated",
+        description: `Created ${captions.length} industry-grade captions with ${Math.round(captions[0]?.engagement_score || 90)}% engagement potential.`,
       });
       
       navigate('/results');
     } catch (error) {
       console.error('Generation error:', error);
       toast({
-        title: "Generation failed",
+        title: "Generation Failed",
         description: "Please try again in a moment.",
         variant: "destructive",
       });
@@ -116,12 +113,20 @@ const Dashboard = () => {
     "#trending", "#viral", "#explore", "#creative", "#inspiration", "#lifestyle", "#motivation", "#success"
   ];
 
+  const platformOptions = [
+    { value: "instagram", label: "Instagram", icon: "📷", description: "Visual storytelling platform" },
+    { value: "facebook", label: "Facebook", icon: "👥", description: "Community engagement focus" },
+    { value: "twitter", label: "Twitter", icon: "🐦", description: "Real-time conversations" },
+    { value: "linkedin", label: "LinkedIn", icon: "💼", description: "Professional networking" },
+    { value: "tiktok", label: "TikTok", icon: "🎵", description: "Short-form video content" }
+  ];
+
   if (isGenerating && loadingStage) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 relative">
-        <DynamicBackground variant="dashboard" />
-        <div className="flex items-center justify-center min-h-screen">
-          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl p-8 border border-white/20 dark:border-gray-700/20 shadow-2xl">
+      <div className="min-h-screen relative">
+        <SpaceBackground variant="cosmic" intensity="medium" />
+        <div className="flex items-center justify-center min-h-screen relative z-10">
+          <div className="bg-white/5 dark:bg-gray-900/20 backdrop-blur-2xl rounded-3xl p-12 border border-white/10 shadow-2xl">
             <PremiumLoadingAnimation 
               stage={loadingStage} 
               onComplete={() => {}} 
@@ -133,142 +138,193 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 relative">
-      <DynamicBackground variant="dashboard" />
-      <div className="relative z-10 py-8">
+    <div className="min-h-screen relative">
+      <SpaceBackground variant="cosmic" intensity="medium" />
+      <div className="relative z-10 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              AI-Powered Caption Studio
+          {/* Premium Header */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <span className="text-sm font-medium text-white/90">AI-Powered Caption Studio</span>
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+              Craft Viral Content with
+              <br />
+              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Precision AI Intelligence
+              </span>
             </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
-              Create viral social media captions with industry-leading AI analysis
+            <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+              Transform your visual content into compelling narratives that captivate audiences 
+              and drive meaningful engagement across all social platforms.
             </p>
           </div>
 
-          <div className="flex justify-center mb-8">
-            <div className="flex gap-2">
-              <Button 
-                variant={!showHistory ? "default" : "outline"}
-                onClick={() => setShowHistory(false)}
-                className="flex items-center gap-2"
-              >
-                <Wand2 className="h-4 w-4" />
-                Create New
-              </Button>
-              <Button 
-                variant={showHistory ? "default" : "outline"}
-                onClick={() => setShowHistory(true)}
-                className="flex items-center gap-2"
-              >
-                <Hash className="h-4 w-4" />
-                View History
-              </Button>
+          {/* Navigation Toggle */}
+          <div className="flex justify-center mb-12">
+            <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-2 border border-white/20">
+              <div className="flex gap-2">
+                <Button 
+                  variant={!showHistory ? "default" : "ghost"}
+                  onClick={() => setShowHistory(false)}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-xl transition-all duration-300 ${
+                    !showHistory 
+                      ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg" 
+                      : "text-white/70 hover:text-white hover:bg-white/10"
+                  }`}
+                >
+                  <Wand2 className="h-4 w-4" />
+                  Create New Caption
+                </Button>
+                <Button 
+                  variant={showHistory ? "default" : "ghost"}
+                  onClick={() => setShowHistory(true)}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-xl transition-all duration-300 ${
+                    showHistory 
+                      ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg" 
+                      : "text-white/70 hover:text-white hover:bg-white/10"
+                  }`}
+                >
+                  <Hash className="h-4 w-4" />
+                  Caption History
+                </Button>
+              </div>
             </div>
           </div>
 
           {showHistory ? (
-            <CaptionHistoryManager />
+            <div className="bg-white/5 backdrop-blur-2xl rounded-3xl border border-white/20 shadow-2xl">
+              <CaptionHistoryManager />
+            </div>
           ) : (
             <div className="grid lg:grid-cols-3 gap-8">
-              {/* Left Column - Content Input */}
-              <Card className="lg:col-span-1 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-white/20 dark:border-gray-700/20 shadow-2xl">
-                <CardHeader className="pb-6">
-                  <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
-                    <Upload className="h-5 w-5" />
-                    Content Details
+              {/* Content Configuration Panel */}
+              <Card className="lg:col-span-1 bg-white/5 backdrop-blur-2xl border-white/20 shadow-2xl">
+                <CardHeader className="pb-8">
+                  <CardTitle className="flex items-center gap-3 text-white text-xl">
+                    <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl">
+                      <Palette className="h-5 w-5 text-white" />
+                    </div>
+                    Content Configuration
                   </CardTitle>
+                  <p className="text-white/60 text-sm mt-2">
+                    Define your content parameters for precision-targeted caption generation
+                  </p>
                 </CardHeader>
-                <CardContent className="space-y-6">
+                <CardContent className="space-y-8">
+                  {/* Platform Selection */}
                   <div>
-                    <Label htmlFor="platform" className="text-base font-medium text-gray-700 dark:text-gray-300">
-                      Target Platform *
+                    <Label className="text-base font-semibold text-white mb-4 flex items-center gap-2">
+                      <Globe2 className="h-4 w-4 text-blue-400" />
+                      Target Platform
                     </Label>
                     <Select value={platform} onValueChange={setPlatform}>
-                      <SelectTrigger className="mt-2">
-                        <SelectValue placeholder="Select platform" />
+                      <SelectTrigger className="bg-white/5 border-white/20 text-white backdrop-blur-xl h-14 text-base">
+                        <SelectValue placeholder="Choose your platform" />
                       </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="instagram">📷 Instagram</SelectItem>
-                        <SelectItem value="facebook">👥 Facebook</SelectItem>
-                        <SelectItem value="twitter">🐦 Twitter</SelectItem>
-                        <SelectItem value="linkedin">💼 LinkedIn</SelectItem>
-                        <SelectItem value="tiktok">🎵 TikTok</SelectItem>
+                      <SelectContent className="bg-gray-900/95 backdrop-blur-xl border-white/20">
+                        {platformOptions.map((option) => (
+                          <SelectItem key={option.value} value={option.value} className="text-white hover:bg-white/10">
+                            <div className="flex items-center gap-3">
+                              <span className="text-lg">{option.icon}</span>
+                              <div>
+                                <div className="font-medium">{option.label}</div>
+                                <div className="text-xs text-white/60">{option.description}</div>
+                              </div>
+                            </div>
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
 
+                  {/* Industry Specification */}
                   <div>
-                    <Label htmlFor="industry" className="text-base font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                      <Building className="h-4 w-4" />
-                      Industry (Optional)
+                    <Label className="text-base font-semibold text-white mb-4 flex items-center gap-2">
+                      <Building className="h-4 w-4 text-purple-400" />
+                      Industry Specialization
                     </Label>
                     <Select value={industry} onValueChange={setIndustry}>
-                      <SelectTrigger className="mt-2">
-                        <SelectValue placeholder="Select your industry" />
+                      <SelectTrigger className="bg-white/5 border-white/20 text-white backdrop-blur-xl h-14 text-base">
+                        <SelectValue placeholder="Select your industry vertical" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-gray-900/95 backdrop-blur-xl border-white/20">
                         {industries.map((ind) => (
-                          <SelectItem key={ind} value={ind}>{ind}</SelectItem>
+                          <SelectItem key={ind} value={ind} className="text-white hover:bg-white/10">
+                            {ind}
+                          </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
                   </div>
 
+                  {/* Audience Targeting */}
                   <div>
-                    <Label htmlFor="audience" className="text-base font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                      <Users className="h-4 w-4" />
-                      Target Audience (Optional)
+                    <Label className="text-base font-semibold text-white mb-4 flex items-center gap-2">
+                      <Users className="h-4 w-4 text-pink-400" />
+                      Audience Demographics
                     </Label>
                     <Select value={targetAudience} onValueChange={setTargetAudience}>
-                      <SelectTrigger className="mt-2">
-                        <SelectValue placeholder="Select your audience" />
+                      <SelectTrigger className="bg-white/5 border-white/20 text-white backdrop-blur-xl h-14 text-base">
+                        <SelectValue placeholder="Define your target audience" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-gray-900/95 backdrop-blur-xl border-white/20">
                         {audiences.map((aud) => (
-                          <SelectItem key={aud} value={aud}>{aud}</SelectItem>
+                          <SelectItem key={aud} value={aud} className="text-white hover:bg-white/10">
+                            {aud}
+                          </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
                   </div>
 
+                  {/* Content Description */}
                   <div>
-                    <Label htmlFor="description" className="text-base font-medium text-gray-700 dark:text-gray-300">
-                      Describe your content (Optional)
+                    <Label className="text-base font-semibold text-white mb-4 flex items-center gap-2">
+                      <Brain className="h-4 w-4 text-green-400" />
+                      Content Context
                     </Label>
                     <Textarea
-                      id="description"
-                      placeholder="e.g., Celebrating our team's latest achievement at the office. Everyone worked hard to reach this milestone..."
+                      placeholder="Describe your content's story, message, or key elements that should be highlighted in the caption..."
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
-                      className="mt-3 min-h-[120px] bg-gray-50 dark:bg-gray-700 border-gray-200 dark:border-gray-600 focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
-                      rows={5}
+                      className="bg-white/5 border-white/20 text-white placeholder:text-white/40 backdrop-blur-xl min-h-[140px] text-base leading-relaxed resize-none focus:ring-2 focus:ring-blue-500/50"
+                      rows={6}
                     />
+                    <div className="text-xs text-white/50 mt-2">
+                      Pro tip: Include emotions, context, and key messages for better AI understanding
+                    </div>
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Middle Column - Image Upload */}
-              <div className="lg:col-span-1 space-y-6">
+              {/* Visual Content Upload */}
+              <div className="lg:col-span-1 space-y-8">
                 <AdvancedImageUpload 
                   onImageChange={setImageUrl} 
                   onAnalysisComplete={setImageKeywords}
                 />
                 
                 {suggestedTags.length > 0 && (
-                  <Card className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-white/20 dark:border-gray-700/20 shadow-2xl">
+                  <Card className="bg-white/5 backdrop-blur-2xl border-white/20 shadow-2xl">
                     <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
-                        <Target className="h-5 w-5" />
-                        AI Detected Themes
+                      <CardTitle className="flex items-center gap-3 text-white">
+                        <div className="p-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-xl">
+                          <Target className="h-5 w-5 text-white" />
+                        </div>
+                        AI Vision Analysis
                       </CardTitle>
+                      <p className="text-white/60 text-sm">
+                        Detected themes and elements from your visual content
+                      </p>
                     </CardHeader>
                     <CardContent>
                       <div className="flex flex-wrap gap-3">
                         {suggestedTags.map((tag, index) => (
                           <span 
                             key={index}
-                            className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-600 dark:text-blue-400 text-sm px-4 py-2 rounded-full border border-blue-200 dark:border-blue-800 hover:bg-gradient-to-r hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-900/50 dark:hover:to-purple-900/50 cursor-pointer transition-colors"
+                            className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-xl text-blue-300 text-sm px-4 py-2 rounded-full border border-blue-400/30 hover:border-blue-400/50 cursor-pointer transition-all duration-300 hover:scale-105"
                           >
                             {tag}
                           </span>
@@ -279,64 +335,79 @@ const Dashboard = () => {
                 )}
               </div>
 
-              {/* Right Column - Enhanced AI Generation */}
-              <Card className="lg:col-span-1 bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl border-white/20 dark:border-gray-700/20 shadow-2xl">
-                <CardHeader className="pb-6">
-                  <CardTitle className="flex items-center gap-2 text-gray-900 dark:text-white">
-                    <Sparkles className="h-5 w-5" />
+              {/* AI Generation Engine */}
+              <Card className="lg:col-span-1 bg-white/5 backdrop-blur-2xl border-white/20 shadow-2xl">
+                <CardHeader className="pb-8">
+                  <CardTitle className="flex items-center gap-3 text-white text-xl">
+                    <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl">
+                      <Zap className="h-5 w-5 text-white animate-pulse" />
+                    </div>
                     Premium AI Engine
                   </CardTitle>
+                  <p className="text-white/60 text-sm mt-2">
+                    Industry-leading artificial intelligence for viral content creation
+                  </p>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 p-6 rounded-xl border border-blue-200 dark:border-blue-800">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
-                        <Wand2 className="h-5 w-5 text-white" />
+                <CardContent className="space-y-8">
+                  {/* AI Capabilities Showcase */}
+                  <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-xl p-6 rounded-2xl border border-purple-400/20">
+                    <div className="flex items-center gap-3 mb-6">
+                      <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl">
+                        <Brain className="h-6 w-6 text-white" />
                       </div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                        Industry-Leading AI
+                      <h3 className="text-lg font-bold text-white">
+                        Neural Caption Intelligence
                       </h3>
                     </div>
-                    <div className="space-y-3 text-sm text-gray-600 dark:text-gray-300">
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-full animate-pulse"></div>
-                        <span>Advanced computer vision & object detection</span>
+                    <div className="space-y-4 text-sm">
+                      <div className="flex items-start gap-3 text-white/80">
+                        <div className="w-2 h-2 bg-gradient-to-r from-green-400 to-blue-400 rounded-full mt-2 animate-pulse"></div>
+                        <div>
+                          <div className="font-medium text-white">Advanced Computer Vision</div>
+                          <div className="text-white/60">Deep learning object detection and scene understanding</div>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-full animate-pulse"></div>
-                        <span>Real-time trending analysis & viral pattern detection</span>
+                      <div className="flex items-start gap-3 text-white/80">
+                        <div className="w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mt-2 animate-pulse"></div>
+                        <div>
+                          <div className="font-medium text-white">Real-Time Trend Analysis</div>
+                          <div className="text-white/60">Live monitoring of viral patterns and hashtag performance</div>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-full animate-pulse"></div>
-                        <span>Multi-tone generation with engagement optimization</span>
+                      <div className="flex items-start gap-3 text-white/80">
+                        <div className="w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full mt-2 animate-pulse"></div>
+                        <div>
+                          <div className="font-medium text-white">Multi-Tone Generation</div>
+                          <div className="text-white/60">Adaptive voice matching with engagement optimization</div>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-full animate-pulse"></div>
-                        <span>Platform-specific viral coefficient analysis</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="w-2 h-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-full animate-pulse"></div>
-                        <span>Audience psychology & brand alignment scoring</span>
+                      <div className="flex items-start gap-3 text-white/80">
+                        <div className="w-2 h-2 bg-gradient-to-r from-pink-400 to-red-400 rounded-full mt-2 animate-pulse"></div>
+                        <div>
+                          <div className="font-medium text-white">Psychographic Targeting</div>
+                          <div className="text-white/60">Audience psychology analysis for maximum resonance</div>
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="p-4 bg-gradient-to-r from-amber-50 to-orange-50 dark:bg-gradient-to-r dark:from-amber-900/20 dark:to-orange-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
-                    <div className="flex items-center gap-2 mb-2">
-                      <TrendingUp className="w-4 h-4 text-amber-600 dark:text-amber-400" />
-                      <span className="text-sm font-medium text-amber-800 dark:text-amber-300">
-                        Live Trending Analysis
-                      </span>
+                  {/* Performance Metrics */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-white/5 backdrop-blur-xl p-4 rounded-xl border border-white/10">
+                      <div className="text-2xl font-bold text-green-400">97%</div>
+                      <div className="text-xs text-white/60">Engagement Rate</div>
                     </div>
-                    <p className="text-xs text-amber-700 dark:text-amber-400">
-                      Our AI monitors trending hashtags, viral patterns, and audience behavior in real-time to maximize your content's reach and engagement potential.
-                    </p>
+                    <div className="bg-white/5 backdrop-blur-xl p-4 rounded-xl border border-white/10">
+                      <div className="text-2xl font-bold text-blue-400">2.4M+</div>
+                      <div className="text-xs text-white/60">Captions Generated</div>
+                    </div>
                   </div>
 
+                  {/* Generation Button */}
                   <Button 
                     onClick={handleGenerate}
                     disabled={isGenerating}
-                    className="w-full bg-gradient-to-r from-blue-500 via-purple-600 to-pink-600 hover:from-blue-600 hover:via-purple-700 hover:to-pink-700 text-white py-6 text-lg rounded-xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 relative overflow-hidden group"
+                    className="w-full bg-gradient-to-r from-blue-500 via-purple-600 to-pink-600 hover:from-blue-600 hover:via-purple-700 hover:to-pink-700 text-white py-6 text-lg font-semibold rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 relative overflow-hidden group"
                     size="lg"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
@@ -355,10 +426,11 @@ const Dashboard = () => {
                     </div>
                   </Button>
 
+                  {/* Status Indicator */}
                   <div className="text-center">
-                    <div className="flex items-center gap-2 text-sm text-green-600 dark:text-green-400 justify-center">
-                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                      Premium AI • Viral Optimization • Industry-Grade Results
+                    <div className="flex items-center gap-2 text-sm text-green-400 justify-center">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      Premium AI Active • Industry-Grade Results • Viral Optimization
                     </div>
                   </div>
                 </CardContent>
