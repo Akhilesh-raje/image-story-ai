@@ -104,7 +104,7 @@ export const getCurrentTrendingData = async (platform: string): Promise<Trending
         hashtags: ['#leadership', '#innovation', '#productivity', '#networking', '#careergrowth', '#AI', '#remotework', '#entrepreneurship'],
         topics: ['artificial intelligence', 'remote work culture', 'leadership development', 'industry insights'],
         keywords: ['strategic', 'innovative', 'professional', 'growth-minded', 'results-driven'],
-        sentiment: 'professional' as const,
+        sentiment: 'positive' as const,
         virality_score: 72
       },
       twitter: {

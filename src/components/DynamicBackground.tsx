@@ -17,6 +17,58 @@ export const DynamicBackground = ({ variant = 'dashboard' }: DynamicBackgroundPr
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
+  useEffect(() => {
+    // Add CSS animations to document head
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes gradientShift {
+        0%, 100% {
+          background-position: 0% 50%, 100% 50%, 0% 50%;
+        }
+        25% {
+          background-position: 100% 0%, 0% 100%, 50% 0%;
+        }
+        50% {
+          background-position: 100% 100%, 0% 0%, 100% 50%;
+        }
+        75% {
+          background-position: 0% 100%, 100% 0%, 50% 100%;
+        }
+      }
+
+      @keyframes gradientFloat {
+        0%, 100% {
+          background-position: 0% 50%, 100% 50%;
+        }
+        50% {
+          background-position: 100% 50%, 0% 50%;
+        }
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(100vh) translateX(0px) scale(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100px) translateX(${Math.random() * 200 - 100}px) scale(1);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   const getBackgroundStyle = () => {
     const x = mousePosition.x / window.innerWidth;
     const y = mousePosition.y / window.innerHeight;
@@ -86,50 +138,6 @@ export const DynamicBackground = ({ variant = 'dashboard' }: DynamicBackgroundPr
           />
         ))}
       </div>
-
-      {/* CSS Animations */}
-      <style jsx>{`
-        @keyframes gradientShift {
-          0%, 100% {
-            background-position: 0% 50%, 100% 50%, 0% 50%;
-          }
-          25% {
-            background-position: 100% 0%, 0% 100%, 50% 0%;
-          }
-          50% {
-            background-position: 100% 100%, 0% 0%, 100% 50%;
-          }
-          75% {
-            background-position: 0% 100%, 100% 0%, 50% 100%;
-          }
-        }
-
-        @keyframes gradientFloat {
-          0%, 100% {
-            background-position: 0% 50%, 100% 50%;
-          }
-          50% {
-            background-position: 100% 50%, 0% 50%;
-          }
-        }
-
-        @keyframes float {
-          0% {
-            transform: translateY(100vh) translateX(0px) scale(0);
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          90% {
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(-100px) translateX(${Math.random() * 200 - 100}px) scale(1);
-            opacity: 0;
-          }
-        }
-      `}</style>
     </>
   );
 };
