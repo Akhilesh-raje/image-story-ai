@@ -1,10 +1,10 @@
-
 import { useState, useEffect } from "react";
 import { CaptionResponse } from "@/services/realCaptionService";
 import ResultsHeader from "@/components/results/ResultsHeader";
 import ImageAnalysisCard from "@/components/results/ImageAnalysisCard";
 import CaptionVariationsCard from "@/components/results/CaptionVariationsCard";
 import CustomizeExportCard from "@/components/results/CustomizeExportCard";
+import { DynamicBackground } from "@/components/DynamicBackground";
 
 const Results = () => {
   const [captions, setCaptions] = useState<CaptionResponse[]>([]);
@@ -47,33 +47,36 @@ const Results = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ResultsHeader captionsCount={captions.length} />
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 relative">
+      <DynamicBackground variant="results" />
+      <div className="relative z-10 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ResultsHeader captionsCount={captions.length} />
 
-        <div className="grid lg:grid-cols-4 gap-8">
-          <ImageAnalysisCard 
-            originalImage={originalImage}
-            captionsCount={captions.length}
-            selectedCaption={selectedCaption}
-          />
+          <div className="grid lg:grid-cols-4 gap-8">
+            <ImageAnalysisCard 
+              originalImage={originalImage}
+              captionsCount={captions.length}
+              selectedCaption={selectedCaption}
+            />
 
-          <CaptionVariationsCard 
-            captions={captions}
-            selectedCaption={selectedCaption}
-            originalRequest={originalRequest}
-            isRegenerating={isRegenerating}
-            onCaptionsUpdate={handleCaptionsUpdate}
-            onCaptionSelect={handleCaptionSelect}
-            onRegeneratingChange={setIsRegenerating}
-          />
+            <CaptionVariationsCard 
+              captions={captions}
+              selectedCaption={selectedCaption}
+              originalRequest={originalRequest}
+              isRegenerating={isRegenerating}
+              onCaptionsUpdate={handleCaptionsUpdate}
+              onCaptionSelect={handleCaptionSelect}
+              onRegeneratingChange={setIsRegenerating}
+            />
 
-          <CustomizeExportCard 
-            selectedCaption={selectedCaption}
-            originalRequest={originalRequest}
-            customCaption={customCaption}
-            onCustomCaptionChange={setCustomCaption}
-          />
+            <CustomizeExportCard 
+              selectedCaption={selectedCaption}
+              originalRequest={originalRequest}
+              customCaption={customCaption}
+              onCustomCaptionChange={setCustomCaption}
+            />
+          </div>
         </div>
       </div>
     </div>

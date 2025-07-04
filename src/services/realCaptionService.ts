@@ -1,4 +1,3 @@
-
 // Real AI Caption Generation Service using OpenAI API
 export interface CaptionRequest {
   imageUrl?: string;
@@ -70,7 +69,7 @@ export const generateAdvancedCaption = async (request: CaptionRequest): Promise<
 const generateEnhancedMockCaption = async (request: CaptionRequest): Promise<CaptionResponse> => {
   const { description, platform = 'instagram', tone = 'casual', industry, targetAudience } = request;
   
-  await new Promise(resolve => setTimeout(resolve, 1500));
+  await new Promise(resolve => setTimeout(resolve, 2000));
   
   let imageKeywords: string[] = [];
   if (request.imageUrl) {
@@ -79,58 +78,54 @@ const generateEnhancedMockCaption = async (request: CaptionRequest): Promise<Cap
   
   const context = [description, industry, targetAudience, ...imageKeywords].filter(Boolean).join(', ');
   
-  const advancedCaptions = {
+  const premiumCaptions = {
     casual: [
-      `Living my best life with ${context} ✨ Who else is feeling this vibe?`,
-      `Just discovered something amazing about ${context} and had to share! 🌟`,
-      `Monday motivation brought to you by ${context} 💪 What's inspiring you today?`,
-      `Can we talk about how incredible ${context} is? Still can't get over it! 🤩`
+      `Just discovered something incredible about ${context} and honestly, I'm still processing it all ✨ The way this moment captures pure authenticity is everything. Who else feels like we're living in the golden age of creativity? 💫`,
+      `Okay but can we talk about how ${context} is literally reshaping everything we thought we knew? 🌟 I've been deep-diving into this trend and the insights are mind-blowing. The future is looking pretty amazing ✨`,
+      `Plot twist: ${context} just became my entire personality and I'm not even sorry about it 🤷‍♀️ Sometimes you stumble upon something that clicks so deeply, it changes your whole perspective 💭`
     ],
     professional: [
-      `Excited to share insights about ${context}. Innovation happens when we embrace new perspectives.`,
-      `Reflecting on the impact of ${context} in today's dynamic landscape. Grateful for continuous learning.`,
-      `Strategic thinking meets creativity: exploring the potential of ${context} for sustainable growth.`,
-      `Leadership lesson: ${context} reminds us that excellence is found in the details and dedication.`
+      `Strategic insights from ${context}: The intersection of innovation and authentic storytelling continues to redefine industry standards. When we align purpose-driven content with data-informed strategies, extraordinary outcomes emerge naturally.`,
+      `Reflecting on the transformative impact of ${context} in today's dynamic marketplace. This approach exemplifies how thoughtful leadership and forward-thinking methodologies create sustainable competitive advantages that resonate with modern audiences.`,
+      `Key learnings from ${context}: Excellence in execution stems from the seamless integration of creative vision and strategic implementation. Grateful for partnerships that challenge conventional thinking and drive meaningful progress.`
     ],
     funny: [
-      `Me trying to explain ${context} to my friends: *confused gesturing* 😅`,
-      `Plot twist: ${context} is actually the secret to happiness! Who knew? 🤪`,
-      `Breaking: Local person discovers ${context} and can't stop talking about it 📰`,
-      `${context} had me like 🤯 and my bank account like 😭 but totally worth it!`
+      `Me trying to explain ${context} to literally anyone who will listen: *gestures frantically* "But you don't understand, this changes EVERYTHING!" 😅 They smile and nod but I know they think I've officially lost it 🤪`,
+      `Breaking: Local person discovers ${context} and immediately becomes That Person who screenshots everything and sends it to their group chat 📱 Update: Group chat has gone suspiciously quiet 💀`,
+      `${context} really said "let me completely derail your productivity today" and I said "absolutely, I accept this challenge" ✨ Three rabbit holes later and I regret nothing 🕳️`
     ],
     inspirational: [
-      `Every journey begins with a single step. Today, ${context} reminds us that dreams become reality through action. ✨`,
-      `In a world full of possibilities, ${context} shows us that courage and creativity can change everything. 🌈`,
-      `The magic happens when passion meets purpose. ${context} is proof that anything is possible. 💫`,
-      `Your story matters. Your dreams matter. Let ${context} be the reminder that you're capable of extraordinary things. 🌟`
+      `In a world that moves at lightning speed, ${context} reminds us that the most powerful transformations happen when we pause, reflect, and choose growth over comfort. ✨ Your journey is uniquely yours—embrace every chapter 🌟`,
+      `The most beautiful thing about ${context} isn't just its immediate impact—it's the ripple effect of possibility it creates. We're not just witnesses to change; we're active participants in shaping tomorrow 💫`,
+      `Sometimes the universe conspires to show us exactly what we need to see. Today, ${context} was that gentle reminder that we're capable of extraordinary things when we align our actions with our values ✨ Keep shining 🌟`
     ]
   };
   
-  const platformHashtags = {
-    instagram: ['#instagram', '#insta', '#photooftheday', '#instagood', '#love', '#beautiful', '#follow', '#instadaily'],
-    facebook: ['#facebook', '#social', '#community', '#connect', '#share', '#friends', '#family', '#life'],
-    twitter: ['#twitter', '#trending', '#thoughts', '#share', '#connect', '#conversation', '#community'],
-    linkedin: ['#linkedin', '#professional', '#career', '#business', '#networking', '#growth', '#leadership', '#success'],
-    tiktok: ['#tiktok', '#fyp', '#viral', '#trending', '#creative', '#fun', '#explore', '#discover']
+  const trendingHashtags = {
+    instagram: ['#aesthetic', '#vibes', '#mindfulness', '#authentic', '#trending', '#viral', '#explore', '#inspiration', '#lifestyle', '#growth'],
+    linkedin: ['#leadership', '#innovation', '#growth', '#professional', '#success', '#networking', '#career', '#business', '#strategy', '#future'],
+    facebook: ['#community', '#connection', '#sharing', '#family', '#friends', '#memories', '#celebration', '#togetherness', '#joy', '#life'],
+    twitter: ['#trending', '#viral', '#discussion', '#breaking', '#opinion', '#thread', '#insights', '#perspective', '#debate', '#culture'],
+    tiktok: ['#fyp', '#viral', '#trending', '#creative', '#original', '#explore', '#discover', '#entertainment', '#fun', '#amazing']
   };
   
-  const industryHashtags = industry ? [`#${industry.toLowerCase()}`, `#${industry.toLowerCase()}life`, `#${industry.toLowerCase()}tips`] : [];
-  const contextHashtags = imageKeywords.slice(0, 5).map(keyword => `#${keyword.toLowerCase().replace(/\s+/g, '')}`);
+  const industryHashtags = industry ? [`#${industry.toLowerCase().replace(/\s+/g, '')}`, `#${industry.toLowerCase().replace(/\s+/g, '')}life`, `#${industry.toLowerCase().replace(/\s+/g, '')}expert`] : [];
+  const contextHashtags = imageKeywords.slice(0, 4).map(keyword => `#${keyword.toLowerCase().replace(/\s+/g, '')}`);
   
   const selectedHashtags = [
     ...contextHashtags,
     ...industryHashtags,
-    ...platformHashtags[platform].slice(0, 6)
+    ...trendingHashtags[platform].slice(0, 8)
   ];
   
-  const selectedCaption = advancedCaptions[tone][Math.floor(Math.random() * advancedCaptions[tone].length)];
+  const selectedCaption = premiumCaptions[tone][Math.floor(Math.random() * premiumCaptions[tone].length)];
   
   return {
     caption: selectedCaption,
     hashtags: [...new Set(selectedHashtags)],
     platform,
     tone,
-    engagement_score: Math.floor(Math.random() * 30) + 70 // Mock engagement score 70-100
+    engagement_score: Math.floor(Math.random() * 20) + 80 // Mock engagement score 80-100
   };
 };
 
