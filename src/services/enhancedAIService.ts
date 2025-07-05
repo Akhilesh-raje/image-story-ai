@@ -1,4 +1,3 @@
-
 // Enhanced AI Service with Advanced Features
 export interface TrendingData {
   hashtags: string[];
@@ -33,6 +32,7 @@ export interface EnhancedCaptionRequest {
   includeEmojis?: boolean;
   captionLength?: 'short' | 'medium' | 'long';
   brandVoice?: string;
+  emojiDensity?: number;
 }
 
 export interface PremiumCaptionResponse {
