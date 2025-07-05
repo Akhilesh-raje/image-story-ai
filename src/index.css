@@ -12,13 +12,13 @@ All colors MUST be HSL.
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
-    --card: 0 0% 100%;
+    --card: 0 0% 98%;
     --card-foreground: 222.2 84% 4.9%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 221.2 83.2% 53.3%;
     --primary-foreground: 210 40% 98%;
 
     --secondary: 210 40% 96.1%;
@@ -35,7 +35,7 @@ All colors MUST be HSL.
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --ring: 221.2 83.2% 53.3%;
 
     --radius: 0.75rem;
 
@@ -59,7 +59,7 @@ All colors MUST be HSL.
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
     --primary-foreground: 222.2 47.4% 11.2%;
 
     --secondary: 217.2 32.6% 17.5%;
@@ -116,5 +116,22 @@ All colors MUST be HSL.
     background: linear-gradient(var(--background), var(--background)) padding-box,
                 linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent))) border-box;
     border: 2px solid transparent;
+  }
+
+  /* Light theme specific overrides */
+  .light-theme-card {
+    @apply bg-white/95 dark:bg-white/5 border-gray-200/80 dark:border-white/20;
+  }
+  
+  .light-theme-text {
+    @apply text-gray-900 dark:text-white;
+  }
+  
+  .light-theme-text-muted {
+    @apply text-gray-600 dark:text-white/60;
+  }
+  
+  .light-theme-button {
+    @apply bg-blue-600 hover:bg-blue-700 dark:bg-gradient-to-r dark:from-blue-500 dark:via-purple-600 dark:to-pink-600 text-white;
   }
 }

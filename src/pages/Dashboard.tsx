@@ -109,7 +109,7 @@ const Dashboard = () => {
       <div className="min-h-screen relative">
         <SpaceBackground variant="cosmic" intensity="medium" />
         <div className="flex items-center justify-center min-h-screen relative z-10 p-4">
-          <div className="bg-white/5 dark:bg-gray-900/20 backdrop-blur-2xl rounded-3xl p-8 md:p-12 border border-white/10 shadow-2xl w-full max-w-lg">
+          <div className="light-theme-card backdrop-blur-2xl rounded-3xl p-8 md:p-12 border shadow-2xl w-full max-w-lg">
             <PremiumLoadingAnimation 
               stage={loadingStage} 
               onComplete={() => {}} 
@@ -121,14 +121,14 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       <SpaceBackground variant="cosmic" intensity="medium" />
       <div className="relative z-10 py-8 md:py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <DashboardHeader showHistory={showHistory} setShowHistory={setShowHistory} />
 
           {showHistory ? (
-            <div className="bg-white/5 dark:bg-white/5 backdrop-blur-2xl rounded-3xl border border-white/20 shadow-2xl">
+            <div className="light-theme-card backdrop-blur-2xl rounded-3xl border shadow-2xl">
               <CaptionHistoryManager />
             </div>
           ) : (
@@ -162,22 +162,22 @@ const Dashboard = () => {
                 />
                 
                 {suggestedTags.length > 0 && (
-                  <Card className="bg-white/5 dark:bg-white/5 backdrop-blur-2xl border-white/20 shadow-2xl">
+                  <Card className="light-theme-card backdrop-blur-2xl border shadow-2xl">
                     <div className="p-4 md:p-6">
                       <div className="flex items-center gap-3 mb-4">
                         <div className="p-2 bg-gradient-to-r from-green-500 to-blue-500 rounded-xl">
                           <Target className="h-4 w-4 text-white" />
                         </div>
-                        <h3 className="text-white dark:text-white font-semibold">AI Vision Analysis</h3>
+                        <h3 className="light-theme-text font-semibold">AI Vision Analysis</h3>
                       </div>
-                      <p className="text-white/60 dark:text-white/60 text-sm mb-4">
+                      <p className="light-theme-text-muted text-sm mb-4">
                         Detected themes from your visual content
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {suggestedTags.map((tag, index) => (
                           <span 
                             key={index}
-                            className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-xl text-blue-300 text-xs px-3 py-2 rounded-full border border-blue-400/30 hover:border-blue-400/50 cursor-pointer transition-all duration-300 hover:scale-105"
+                            className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-xl text-blue-600 dark:text-blue-300 text-xs px-3 py-2 rounded-full border border-blue-400/30 hover:border-blue-400/50 cursor-pointer transition-all duration-300 hover:scale-105"
                           >
                             {tag}
                           </span>
