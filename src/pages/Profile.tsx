@@ -2,152 +2,283 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { User, History, Settings, Copy, Heart, Share2 } from "lucide-react";
+import { User, History, Settings, Copy, Heart, Share2, Crown, Zap, TrendingUp, Award } from "lucide-react";
+import { SpaceBackground } from "@/components/SpaceBackground";
 
 const Profile = () => {
   const historyItems = [
     {
       id: 1,
-      caption: "Chasing sunsets and sea breezes in Cinque Terre 🌅 Sometimes the most beautiful moments are found in quiet spaces...",
-      hashtags: ["#travel", "#sunset", "#CinqueTerre", "#wanderlust"],
+      caption: "🌅 Chasing sunsets and sea breezes in Cinque Terre ✨ Sometimes the most beautiful moments are found in quiet spaces where the soul can breathe... 🌊💫",
+      hashtags: ["#travel", "#sunset", "#CinqueTerre", "#wanderlust", "#serenity", "#goldenhour"],
       image: "/lovable-uploads/f57ec341-9d83-439f-979f-a7e2afe31258.png",
       date: "2 hours ago",
-      liked: true
+      liked: true,
+      engagement: 97,
+      tone: "Poetic & Dreamy"
     },
     {
       id: 2,
-      caption: "Lost in the golden hour magic ✨ Every sunset brings the promise of a new dawn...",
-      hashtags: ["#goldenhour", "#sunset", "#photography", "#peaceful"],
+      caption: "✨ Lost in the golden hour magic 🌅 Every sunset brings the promise of a new dawn and endless possibilities... 🙏💛",
+      hashtags: ["#goldenhour", "#sunset", "#photography", "#peaceful", "#mindfulness", "#gratitude"],
       image: "/lovable-uploads/f57ec341-9d83-439f-979f-a7e2afe31258.png",
       date: "1 day ago",
-      liked: false
+      liked: false,
+      engagement: 89,
+      tone: "Inspirational"
     },
     {
       id: 3,
-      caption: "Where the Mediterranean meets the sky 🌊 Finding peace in the rhythm of waves...",
-      hashtags: ["#mediterranean", "#ocean", "#travel", "#serenity"],
+      caption: "🌊 Where the Mediterranean meets the sky ☁️ Finding peace in the rhythm of waves and the whispers of ancient winds... 🏛️⚓",
+      hashtags: ["#mediterranean", "#ocean", "#travel", "#serenity", "#coastallife", "#bluewater"],
       image: "/lovable-uploads/f57ec341-9d83-439f-979f-a7e2afe31258.png",
       date: "3 days ago",
-      liked: true
+      liked: true,
+      engagement: 94,
+      tone: "Contemplative"
     }
   ];
 
-  return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-8">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Your Profile
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300">
-            Manage your account and view your caption history
-          </p>
-        </div>
+  const stats = [
+    { label: "Total Captions", value: "247", icon: Zap, color: "text-blue-400" },
+    { label: "Avg Engagement", value: "94%", icon: TrendingUp, color: "text-green-400" },
+    { label: "Viral Hits", value: "23", icon: Crown, color: "text-yellow-400" },
+    { label: "Pro Member", value: "Elite", icon: Award, color: "text-purple-400" }
+  ];
 
-        <Tabs defaultValue="history" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto mb-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-            <TabsTrigger value="history" className="flex items-center gap-2 data-[state=active]:bg-blue-50 dark:data-[state=active]:bg-blue-900/30 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400">
-              <History className="h-4 w-4" />
-              History
-            </TabsTrigger>
-            <TabsTrigger value="profile" className="flex items-center gap-2 data-[state=active]:bg-blue-50 dark:data-[state=active]:bg-blue-900/30 data-[state=active]:text-blue-600 dark:data-[state=active]:text-blue-400">
-              <User className="h-4 w-4" />
-              Profile
-            </TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="history" className="mt-8">
-            <div className="space-y-6">
-              {historyItems.map((item) => (
-                <Card key={item.id} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-xl transition-all duration-300">
-                  <CardContent className="p-6">
-                    <div className="flex gap-6">
-                      <div className="w-24 h-24 bg-gray-100 dark:bg-gray-700 rounded-xl overflow-hidden flex-shrink-0 shadow-md">
-                        <img 
-                          src={item.image} 
-                          alt="Generated content" 
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between mb-3">
-                          <p className="text-gray-900 dark:text-white font-medium text-lg leading-relaxed line-clamp-2">
-                            {item.caption}
-                          </p>
-                          <span className="text-sm text-gray-500 dark:text-gray-400 ml-4 whitespace-nowrap">
-                            {item.date}
-                          </span>
+  return (
+    <div className="min-h-screen relative">
+      <SpaceBackground variant="nebula" intensity="vibrant" />
+      
+      <div className="relative z-10 py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Enhanced Header */}
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-6">
+              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+              <span className="text-sm font-medium text-white/90">AI-Powered Profile Analytics</span>
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+              Your Creative
+              <br />
+              <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Command Center
+              </span>
+            </h1>
+            <p className="text-xl text-white/70 max-w-3xl mx-auto leading-relaxed">
+              Track your content performance, manage your creative history, and unlock insights 
+              that drive viral engagement across all your social platforms.
+            </p>
+          </div>
+
+          {/* Enhanced Stats Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+            {stats.map((stat, index) => (
+              <div 
+                key={index}
+                className="bg-white/5 backdrop-blur-2xl rounded-2xl p-6 border border-white/20 hover:border-white/30 transition-all duration-300 group hover:scale-105"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="p-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                    <stat.icon className={`h-6 w-6 ${stat.color}`} />
+                  </div>
+                  <div>
+                    <div className={`text-2xl font-bold ${stat.color}`}>{stat.value}</div>
+                    <div className="text-white/60 text-sm">{stat.label}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <Tabs defaultValue="history" className="w-full">
+            <div className="flex justify-center mb-12">
+              <TabsList className="bg-white/5 backdrop-blur-xl border border-white/20 p-2 rounded-2xl">
+                <TabsTrigger 
+                  value="history" 
+                  className="flex items-center gap-3 px-8 py-4 rounded-xl data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-600 data-[state=active]:text-white text-white/70 transition-all duration-300"
+                >
+                  <History className="h-5 w-5" />
+                  Creative History
+                </TabsTrigger>
+                <TabsTrigger 
+                  value="profile" 
+                  className="flex items-center gap-3 px-8 py-4 rounded-xl data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-purple-600 data-[state=active]:text-white text-white/70 transition-all duration-300"
+                >
+                  <User className="h-5 w-5" />
+                  Profile Settings
+                </TabsTrigger>
+              </TabsList>
+            </div>
+            
+            <TabsContent value="history" className="mt-8">
+              <div className="space-y-8">
+                {historyItems.map((item) => (
+                  <Card key={item.id} className="bg-white/5 backdrop-blur-2xl border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-[1.02] group overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <CardContent className="p-8 relative z-10">
+                      <div className="flex gap-8">
+                        <div className="w-32 h-32 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl overflow-hidden flex-shrink-0 shadow-xl group-hover:scale-105 transition-transform duration-300">
+                          <img 
+                            src={item.image} 
+                            alt="Generated content" 
+                            className="w-full h-full object-cover"
+                          />
                         </div>
-                        <div className="flex flex-wrap gap-2 mb-4">
-                          {item.hashtags.map((tag, index) => (
-                            <span 
-                              key={index} 
-                              className="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm px-3 py-1 rounded-full border border-blue-200 dark:border-blue-800"
-                            >
-                              {tag}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-start justify-between mb-6">
+                            <div className="flex-1">
+                              <p className="text-white font-medium text-lg leading-relaxed mb-4">
+                                {item.caption}
+                              </p>
+                              <div className="flex items-center gap-4 mb-4">
+                                <div className="flex items-center gap-2">
+                                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                  <span className="text-green-400 font-medium text-sm">{item.engagement}% Engagement</span>
+                                </div>
+                                <div className="px-3 py-1 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full border border-purple-400/30">
+                                  <span className="text-purple-300 text-sm font-medium">{item.tone}</span>
+                                </div>
+                              </div>
+                            </div>
+                            <span className="text-white/50 ml-6 whitespace-nowrap text-sm">
+                              {item.date}
                             </span>
-                          ))}
+                          </div>
+                          <div className="flex flex-wrap gap-3 mb-6">
+                            {item.hashtags.map((tag, index) => (
+                              <span 
+                                key={index} 
+                                className="bg-blue-500/10 backdrop-blur-xl text-blue-300 text-sm px-4 py-2 rounded-full border border-blue-400/30 hover:border-blue-400/50 cursor-pointer transition-all duration-300 hover:scale-105"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                          <div className="flex items-center gap-4">
+                            <Button size="sm" className="bg-white/10 backdrop-blur-xl hover:bg-white/20 text-white border border-white/20 hover:border-white/30 transition-all duration-300">
+                              <Copy className="h-4 w-4 mr-2" />
+                              Copy Caption
+                            </Button>
+                            <Button 
+                              size="sm" 
+                              className={`backdrop-blur-xl border transition-all duration-300 ${
+                                item.liked 
+                                  ? 'bg-red-500/20 text-red-300 border-red-400/30 hover:bg-red-500/30' 
+                                  : 'bg-white/10 text-white/80 border-white/20 hover:bg-white/20'
+                              }`}
+                            >
+                              <Heart className={`h-4 w-4 mr-2 ${item.liked ? 'fill-current' : ''}`} />
+                              {item.liked ? 'Loved' : 'Love'}
+                            </Button>
+                            <Button size="sm" className="bg-white/10 backdrop-blur-xl hover:bg-white/20 text-white border border-white/20 hover:border-white/30 transition-all duration-300">
+                              <Share2 className="h-4 w-4 mr-2" />
+                              Share
+                            </Button>
+                          </div>
                         </div>
-                        <div className="flex items-center gap-3">
-                          <Button size="sm" variant="outline" className="flex items-center gap-2">
-                            <Copy className="h-3 w-3" />
-                            Copy
-                          </Button>
-                          <Button 
-                            size="sm" 
-                            variant="outline" 
-                            className={`flex items-center gap-2 ${item.liked ? 'text-red-500 border-red-200 bg-red-50 dark:bg-red-900/20 dark:border-red-800' : ''}`}
-                          >
-                            <Heart className={`h-3 w-3 ${item.liked ? 'fill-current' : ''}`} />
-                            {item.liked ? 'Liked' : 'Like'}
-                          </Button>
-                          <Button size="sm" variant="outline" className="flex items-center gap-2">
-                            <Share2 className="h-3 w-3" />
-                            Share
-                          </Button>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="profile" className="mt-8">
+              <div className="max-w-3xl mx-auto">
+                <Card className="bg-white/5 backdrop-blur-2xl border-white/20 shadow-2xl">
+                  <CardHeader className="pb-8">
+                    <CardTitle className="flex items-center gap-4 text-white text-2xl">
+                      <div className="p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl shadow-lg">
+                        <User className="h-8 w-8 text-white" />
+                      </div>
+                      Elite Creator Profile
+                    </CardTitle>
+                    <p className="text-white/60 text-lg mt-2">
+                      Manage your premium account settings and preferences
+                    </p>
+                  </CardHeader>
+                  <CardContent className="space-y-8">
+                    <div className="flex items-center gap-8">
+                      <div className="relative">
+                        <div className="w-24 h-24 bg-gradient-to-br from-blue-500 via-purple-600 to-pink-600 rounded-full flex items-center justify-center shadow-2xl">
+                          <User className="h-12 w-12 text-white" />
                         </div>
+                        <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+                          <Crown className="h-4 w-4 text-white" />
+                        </div>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-3xl font-bold text-white mb-2">James Smith</h3>
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="px-3 py-1 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-full border border-yellow-400/30">
+                            <span className="text-yellow-300 text-sm font-medium">Pro Elite Member</span>
+                          </div>
+                          <div className="px-3 py-1 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-full border border-green-400/30">
+                            <span className="text-green-300 text-sm font-medium">Verified Creator</span>
+                          </div>
+                        </div>
+                        <p className="text-white/70 text-lg">Logged in with Google</p>
+                        <p className="text-white/50 mt-2">
+                          Elite member since October 2024 • 247 viral captions generated
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <div className="grid md:grid-cols-2 gap-6 pt-8 border-t border-white/20">
+                      <div className="space-y-4">
+                        <h4 className="text-white font-semibold text-lg">Account Features</h4>
+                        <div className="space-y-3">
+                          <div className="flex items-center gap-3">
+                            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span className="text-white/80">Unlimited AI Generations</span>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></div>
+                            <span className="text-white/80">Advanced Analytics</span>
+                          </div>
+                          <div className="flex items-center gap-3">
+                            <div className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></div>
+                            <span className="text-white/80">Priority Support</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="space-y-4">
+                        <h4 className="text-white font-semibold text-lg">Usage Stats</h4>
+                        <div className="space-y-3">
+                          <div className="flex justify-between">
+                            <span className="text-white/70">Monthly Generations</span>
+                            <span className="text-green-400 font-medium">247/∞</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-white/70">Storage Used</span>
+                            <span className="text-blue-400 font-medium">2.1GB/100GB</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span className="text-white/70">API Calls</span>
+                            <span className="text-purple-400 font-medium">1,247</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="pt-8 border-t border-white/20">
+                      <div className="flex gap-4">
+                        <Button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                          <Settings className="h-5 w-5 mr-2" />
+                          Advanced Settings
+                        </Button>
+                        <Button variant="outline" className="bg-white/10 backdrop-blur-xl hover:bg-white/20 text-white border-white/20 hover:border-white/30 px-6 py-3 rounded-xl transition-all duration-300">
+                          Export Data
+                        </Button>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
-              ))}
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="profile" className="mt-8">
-            <div className="max-w-2xl mx-auto space-y-6">
-              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-lg">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-gray-900 dark:text-white">
-                    <User className="h-5 w-5" />
-                    Profile Information
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="flex items-center gap-6">
-                    <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
-                      <User className="h-8 w-8 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-semibold text-gray-900 dark:text-white">James Smith</h3>
-                      <p className="text-gray-600 dark:text-gray-300 mt-1">Logged in with Google</p>
-                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                        Member since October 2024 • 3 captions generated
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="pt-6 border-t border-gray-200 dark:border-gray-700">
-                    <Button variant="outline" className="flex items-center gap-2">
-                      <Settings className="h-4 w-4" />
-                      Account Settings
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-        </Tabs>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
       </div>
     </div>
   );

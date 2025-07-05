@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,6 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import { SpaceBackground } from "@/components/SpaceBackground";
 import { PremiumLoadingAnimation } from "@/components/PremiumLoadingAnimation";
 import { generateMultiplePremiumCaptions, EnhancedCaptionRequest } from "@/services/enhancedAIService";
+import { EmojiToneSelector } from "@/components/EmojiToneSelector";
 
 const Dashboard = () => {
   const [description, setDescription] = useState("");
@@ -28,6 +28,8 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [loadingStage, setLoadingStage] = useState<'analyzing' | 'trending' | 'generating' | 'optimizing' | null>(null);
+  const [selectedTone, setSelectedTone] = useState<string>("authentic");
+  const [emojiQuantity, setEmojiQuantity] = useState<number>(3);
 
   const handleGenerate = async () => {
     if (!description && !imageUrl) {
@@ -58,7 +60,8 @@ const Dashboard = () => {
         targetAudience: targetAudience || undefined,
         includeEmojis: true,
         captionLength: 'medium',
-        brandVoice: 'authentic'
+        brandVoice: selectedTone as any,
+        emojiDensity: emojiQuantity
       };
 
       const captions = await generateMultiplePremiumCaptions(request);
@@ -198,7 +201,7 @@ const Dashboard = () => {
               <CaptionHistoryManager />
             </div>
           ) : (
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-4 gap-8">
               {/* Content Configuration Panel */}
               <Card className="lg:col-span-1 bg-white/5 backdrop-blur-2xl border-white/20 shadow-2xl">
                 <CardHeader className="pb-8">
@@ -306,6 +309,14 @@ const Dashboard = () => {
                   onAnalysisComplete={setImageKeywords}
                 />
                 
+                {/* Enhanced Emoji & Tone Selector */}
+                <EmojiToneSelector
+                  selectedTone={selectedTone}
+                  emojiQuantity={emojiQuantity}
+                  onToneChange={setSelectedTone}
+                  onEmojiQuantityChange={setEmojiQuantity}
+                />
+                
                 {suggestedTags.length > 0 && (
                   <Card className="bg-white/5 backdrop-blur-2xl border-white/20 shadow-2xl">
                     <CardHeader>
@@ -336,7 +347,7 @@ const Dashboard = () => {
               </div>
 
               {/* AI Generation Engine */}
-              <Card className="lg:col-span-1 bg-white/5 backdrop-blur-2xl border-white/20 shadow-2xl">
+              <Card className="lg:col-span-2 bg-white/5 backdrop-blur-2xl border-white/20 shadow-2xl">
                 <CardHeader className="pb-8">
                   <CardTitle className="flex items-center gap-3 text-white text-xl">
                     <div className="p-2 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl">
