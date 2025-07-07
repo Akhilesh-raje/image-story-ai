@@ -96,39 +96,39 @@ export const EmojiToneSelector = ({
   };
 
   return (
-    <Card className="bg-white/5 backdrop-blur-2xl border-white/20 shadow-2xl">
+    <Card className="bg-white dark:bg-white/5 backdrop-blur-2xl border-gray-200 dark:border-white/20 shadow-2xl">
       <CardHeader className="pb-6">
-        <CardTitle className="flex items-center gap-3 text-white text-xl">
+        <CardTitle className="flex items-center gap-3 text-gray-900 dark:text-white text-xl">
           <div className={`p-2 bg-gradient-to-r ${selectedToneData.gradient} rounded-xl`}>
             <selectedToneData.icon className="h-5 w-5 text-white" />
           </div>
           Voice & Emoji Configuration
         </CardTitle>
-        <p className="text-white/60 text-sm mt-2">
+        <p className="text-gray-600 dark:text-white/60 text-sm mt-2">
           Customize your caption's personality and emoji density for optimal engagement
         </p>
       </CardHeader>
       <CardContent className="space-y-8">
         {/* Tone Selection */}
         <div>
-          <Label className="text-base font-semibold text-white mb-4 flex items-center gap-2">
+          <Label className="text-base font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
             <Palette className="h-4 w-4 text-purple-400" />
             Brand Voice & Tone
           </Label>
           <Select value={selectedTone} onValueChange={onToneChange}>
-            <SelectTrigger className="bg-white/5 border-white/20 text-white backdrop-blur-xl h-16 text-base">
+            <SelectTrigger className="bg-white dark:bg-white/5 border-gray-200 dark:border-white/20 text-gray-900 dark:text-white backdrop-blur-xl h-16 text-base">
               <SelectValue placeholder="Choose your brand voice" />
             </SelectTrigger>
-            <SelectContent className="bg-gray-900/95 backdrop-blur-xl border-white/20 max-h-96">
+            <SelectContent className="bg-white dark:bg-gray-900/95 backdrop-blur-xl border-gray-200 dark:border-white/20 max-h-96">
               {tones.map((tone) => (
-                <SelectItem key={tone.value} value={tone.value} className="text-white hover:bg-white/10 p-4">
+                <SelectItem key={tone.value} value={tone.value} className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-white/10 p-4">
                   <div className="flex items-center gap-4 w-full">
                     <div className={`p-2 bg-gradient-to-r ${tone.gradient} rounded-lg flex-shrink-0`}>
                       <tone.icon className="h-4 w-4 text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="font-medium text-white">{tone.label}</div>
-                      <div className="text-xs text-white/60 mt-1">{tone.description}</div>
+                      <div className="font-medium text-gray-900 dark:text-white">{tone.label}</div>
+                      <div className="text-xs text-gray-600 dark:text-white/60 mt-1">{tone.description}</div>
                       <div className="flex gap-1 mt-2">
                         {tone.examples.map((emoji, index) => (
                           <span key={index} className="text-sm">{emoji}</span>
@@ -142,15 +142,15 @@ export const EmojiToneSelector = ({
           </Select>
           
           {/* Selected Tone Preview */}
-          <div className={`mt-4 p-4 bg-gradient-to-r ${selectedToneData.gradient}/10 backdrop-blur-xl rounded-xl border border-white/10`}>
+          <div className={`mt-4 p-4 bg-gradient-to-r ${selectedToneData.gradient}/10 backdrop-blur-xl rounded-xl border border-gray-200 dark:border-white/10`}>
             <div className="flex items-center gap-3 mb-2">
               <selectedToneData.icon className={`h-5 w-5 bg-gradient-to-r ${selectedToneData.gradient} bg-clip-text text-transparent`} />
-              <span className="text-white font-medium">{selectedToneData.label}</span>
+              <span className="text-gray-900 dark:text-white font-medium">{selectedToneData.label}</span>
             </div>
-            <p className="text-white/70 text-sm">{selectedToneData.description}</p>
+            <p className="text-gray-600 dark:text-white/70 text-sm">{selectedToneData.description}</p>
             <div className="flex gap-2 mt-3">
               {selectedToneData.examples.map((emoji, index) => (
-                <span key={index} className="text-lg bg-white/10 px-2 py-1 rounded-lg">{emoji}</span>
+                <span key={index} className="text-lg bg-gray-100 dark:bg-white/10 px-2 py-1 rounded-lg">{emoji}</span>
               ))}
             </div>
           </div>
@@ -159,11 +159,11 @@ export const EmojiToneSelector = ({
         {/* Emoji Quantity Slider */}
         <div>
           <div className="flex items-center justify-between mb-4">
-            <Label className="text-base font-semibold text-white flex items-center gap-2">
+            <Label className="text-base font-semibold text-gray-900 dark:text-white flex items-center gap-2">
               <Smile className="h-4 w-4 text-yellow-400" />
               Emoji Density
             </Label>
-            <div className="text-sm text-white/70 bg-white/10 backdrop-blur-xl px-3 py-1 rounded-full">
+            <div className="text-sm text-gray-600 dark:text-white/70 bg-gray-100 dark:bg-white/10 backdrop-blur-xl px-3 py-1 rounded-full">
               {getEmojiQuantityLabel(emojiQuantity)}
             </div>
           </div>
@@ -179,10 +179,10 @@ export const EmojiToneSelector = ({
             />
             
             {/* Emoji Preview */}
-            <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-white/10">
-              <div className="text-white/70 text-sm mb-3">Preview Density:</div>
+            <div className="bg-gray-50 dark:bg-white/5 backdrop-blur-xl rounded-xl p-4 border border-gray-200 dark:border-white/10">
+              <div className="text-gray-600 dark:text-white/70 text-sm mb-3">Preview Density:</div>
               <div className="flex items-center gap-2">
-                <span className="text-gray-300">Your amazing content here</span>
+                <span className="text-gray-700 dark:text-gray-300">Your amazing content here</span>
                 {Array.from({ length: Math.min(emojiQuantity, 8) }, (_, i) => (
                   <span key={i} className="text-lg">
                     {selectedToneData.examples[i % selectedToneData.examples.length]}
@@ -192,7 +192,7 @@ export const EmojiToneSelector = ({
             </div>
             
             {/* Density Scale */}
-            <div className="flex justify-between text-xs text-white/50 px-1">
+            <div className="flex justify-between text-xs text-gray-500 dark:text-white/50 px-1">
               <span>Minimal</span>
               <span>Moderate</span>
               <span>Rich</span>
@@ -205,9 +205,9 @@ export const EmojiToneSelector = ({
         <div className="bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 backdrop-blur-xl p-4 rounded-xl border border-purple-400/20">
           <div className="flex items-center gap-2 mb-2">
             <Zap className="h-4 w-4 text-purple-400" />
-            <span className="text-white font-medium text-sm">AI Enhancement Active</span>
+            <span className="text-gray-900 dark:text-white font-medium text-sm">AI Enhancement Active</span>
           </div>
-          <p className="text-white/60 text-xs leading-relaxed">
+          <p className="text-gray-600 dark:text-white/60 text-xs leading-relaxed">
             Our advanced AI will intelligently place emojis based on context, emotion, and engagement patterns 
             while maintaining your selected tone and density preferences.
           </p>
