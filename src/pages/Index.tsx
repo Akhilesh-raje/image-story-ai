@@ -47,7 +47,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-white dark:bg-gray-900">
+    <div className="min-h-screen relative overflow-hidden cream-pink-gradient dark:bg-gray-900">
       <SpaceBackground variant="galaxy" intensity="vibrant" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">

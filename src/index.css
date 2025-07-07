@@ -137,7 +137,7 @@ All colors MUST be HSL.
 
   /* Enhanced visibility for light theme */
   .theme-card {
-    @apply bg-white dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800/20 shadow-lg backdrop-blur-sm;
+    @apply bg-white/95 dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800/20 shadow-lg backdrop-blur-sm;
   }
 
   .theme-text {
@@ -145,7 +145,7 @@ All colors MUST be HSL.
   }
 
   .theme-text-muted {
-    @apply text-gray-600 dark:text-gray-400;
+    @apply text-gray-700 dark:text-gray-400;
   }
 
   .theme-input {
@@ -158,5 +158,14 @@ All colors MUST be HSL.
 
   .theme-button-secondary {
     @apply bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600;
+  }
+
+  /* New cream-pink gradient background */
+  .cream-pink-gradient {
+    background: linear-gradient(135deg, #fef7f0 0%, #fdf2f8 25%, #fce7f3 50%, #f9f4f0 75%, #fef3e2 100%);
+  }
+
+  .cream-pink-gradient.dark {
+    background: linear-gradient(135deg, #1f2937 0%, #374151 25%, #4b5563 50%, #374151 75%, #1f2937 100%);
   }
 }
