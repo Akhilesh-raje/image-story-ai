@@ -47,29 +47,29 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden bg-white dark:bg-gray-900">
       <SpaceBackground variant="galaxy" intensity="vibrant" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         {/* Hero Section */}
         <div className="text-center mb-32">
           {/* Status Badge */}
-          <div className="inline-flex items-center gap-3 bg-white/5 backdrop-blur-xl rounded-full px-6 py-3 border border-white/20 mb-8">
+          <div className="inline-flex items-center gap-3 theme-card backdrop-blur-xl rounded-full px-6 py-3 border mb-8">
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span className="text-sm font-medium text-white/90">AI-Powered • Real-Time Analysis • Industry Leading</span>
+            <span className="text-sm font-medium theme-text">AI-Powered • Real-Time Analysis • Industry Leading</span>
           </div>
           
           {/* Main Heading */}
-          <h1 className="text-6xl md:text-8xl font-bold text-white mb-8 leading-tight">
+          <h1 className="text-6xl md:text-8xl font-bold theme-text mb-8 leading-tight">
             Transform Ideas Into
             <br />
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
               Viral Stories
             </span>
           </h1>
           
           {/* Subheading */}
-          <p className="text-2xl text-white/70 mb-16 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-2xl theme-text-muted mb-16 max-w-4xl mx-auto leading-relaxed">
             Harness the power of advanced artificial intelligence to craft compelling social media captions 
             that captivate audiences and drive unprecedented engagement across all platforms.
           </p>
@@ -78,7 +78,7 @@ const Index = () => {
           <div className="flex flex-col items-center gap-8">
             <Button 
               size="lg" 
-              className="bg-gradient-to-r from-blue-500 via-purple-600 to-pink-600 hover:from-blue-600 hover:via-purple-700 hover:to-pink-700 text-white px-12 py-6 text-xl font-semibold rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 group relative overflow-hidden"
+              className="theme-button-primary px-12 py-6 text-xl font-semibold rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105 group relative overflow-hidden"
               onClick={() => navigate('/dashboard')}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
@@ -89,11 +89,11 @@ const Index = () => {
             </Button>
             
             {/* Social Proof */}
-            <div className="flex items-center gap-8 text-white/60">
+            <div className="flex items-center gap-8 theme-text-muted">
               <div className="flex items-center gap-3">
                 <div className="flex -space-x-3">
                   {[1, 2, 3, 4, 5].map((i) => (
-                    <div key={i} className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 border-2 border-white/20"></div>
+                    <div key={i} className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 border-2 border-white dark:border-gray-800"></div>
                   ))}
                 </div>
                 <span className="font-medium">50K+ Creators</span>
@@ -113,14 +113,14 @@ const Index = () => {
         {/* Features Grid */}
         <div className="mb-32">
           <div className="text-center mb-20">
-            <h2 className="text-5xl font-bold text-white mb-6">
+            <h2 className="text-5xl font-bold theme-text mb-6">
               Powered by Advanced
               <br />
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Artificial Intelligence
               </span>
             </h2>
-            <p className="text-xl text-white/60 max-w-3xl mx-auto">
+            <p className="text-xl theme-text-muted max-w-3xl mx-auto">
               Experience the future of content creation with our revolutionary AI technology
             </p>
           </div>
@@ -129,7 +129,7 @@ const Index = () => {
             {features.map((feature, index) => (
               <div 
                 key={index} 
-                className="group bg-white/5 backdrop-blur-2xl rounded-3xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 hover:bg-white/10 relative overflow-hidden"
+                className="group theme-card backdrop-blur-2xl rounded-3xl p-8 border hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-500 hover:scale-105 hover:shadow-xl relative overflow-hidden"
               >
                 {/* Gradient Overlay */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
@@ -138,10 +138,10 @@ const Index = () => {
                   <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${feature.gradient} p-4 mb-8 group-hover:scale-110 transition-transform duration-300`}>
                     <feature.icon className="w-full h-full text-white" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 group-hover:bg-clip-text transition-all duration-300">
+                  <h3 className="text-2xl font-bold theme-text mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text transition-all duration-300">
                     {feature.title}
                   </h3>
-                  <p className="text-white/60 text-lg leading-relaxed group-hover:text-white/80 transition-colors duration-300">
+                  <p className="theme-text-muted text-lg leading-relaxed group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors duration-300">
                     {feature.description}
                   </p>
                 </div>
@@ -152,23 +152,23 @@ const Index = () => {
 
         {/* Stats Section */}
         <div className="text-center">
-          <div className="bg-white/5 backdrop-blur-2xl rounded-3xl p-12 border border-white/20">
+          <div className="theme-card backdrop-blur-2xl rounded-3xl p-12 border">
             <div className="grid md:grid-cols-4 gap-8">
               <div>
-                <div className="text-4xl font-bold text-blue-400 mb-2">97%</div>
-                <div className="text-white/60">Engagement Increase</div>
+                <div className="text-4xl font-bold text-blue-600 mb-2">97%</div>
+                <div className="theme-text-muted">Engagement Increase</div>
               </div>
               <div>
-                <div className="text-4xl font-bold text-purple-400 mb-2">2.4M+</div>
-                <div className="text-white/60">Captions Generated</div>
+                <div className="text-4xl font-bold text-purple-600 mb-2">2.4M+</div>
+                <div className="theme-text-muted">Captions Generated</div>
               </div>
               <div>
-                <div className="text-4xl font-bold text-pink-400 mb-2">15sec</div>
-                <div className="text-white/60">Average Generation Time</div>
+                <div className="text-4xl font-bold text-pink-600 mb-2">15sec</div>
+                <div className="theme-text-muted">Average Generation Time</div>
               </div>
               <div>
-                <div className="text-4xl font-bold text-green-400 mb-2">50K+</div>
-                <div className="text-white/60">Active Creators</div>
+                <div className="text-4xl font-bold text-green-600 mb-2">50K+</div>
+                <div className="theme-text-muted">Active Creators</div>
               </div>
             </div>
           </div>

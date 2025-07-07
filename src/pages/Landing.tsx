@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -94,7 +95,7 @@ const Landing = () => {
   ];
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden bg-white dark:bg-gray-900">
       <SpaceBackground variant="nebula" intensity="medium" />
 
       <div className="relative z-10">
@@ -112,11 +113,11 @@ const Landing = () => {
                 </div>
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full animate-pulse"></div>
               </div>
-              <h1 className="text-2xl font-bold text-white">
+              <h1 className="text-2xl font-bold theme-text">
                 Caption Genius
               </h1>
             </div>
-            <div className="bg-blue-500/20 backdrop-blur-xl border border-blue-500/30 text-blue-300 px-4 py-2 rounded-full text-sm">
+            <div className="bg-blue-500/20 backdrop-blur-xl border border-blue-500/30 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-full text-sm">
               Beta
             </div>
           </div>
@@ -125,21 +126,21 @@ const Landing = () => {
         {/* Hero Section */}
         <section className="container mx-auto px-4 py-20 text-center">
           <div className="max-w-5xl mx-auto">
-            <div className="inline-flex items-center gap-3 bg-blue-500/10 backdrop-blur-xl border border-blue-500/30 text-blue-300 px-6 py-3 rounded-full mb-8">
+            <div className="inline-flex items-center gap-3 bg-blue-500/10 backdrop-blur-xl border border-blue-500/30 text-blue-600 dark:text-blue-400 px-6 py-3 rounded-full mb-8">
               🚀 Now with Advanced AI Analysis
             </div>
             
             <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight">
-              <span className="text-white">
+              <span className="theme-text">
                 Transform Your
               </span>
               <br />
-              <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 Social Stories
               </span>
             </h1>
             
-            <p className="text-2xl text-white/70 mb-16 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-2xl theme-text-muted mb-16 max-w-4xl mx-auto leading-relaxed">
               Create engaging, professional captions that capture hearts and drive engagement. 
               Our AI understands your brand voice and crafts the perfect message every time.
             </p>
@@ -149,7 +150,7 @@ const Landing = () => {
                 size="lg" 
                 onClick={handleSignIn}
                 disabled={isSigningIn || isLoading}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg rounded-2xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 group min-w-[200px]"
+                className="theme-button-primary px-8 py-4 text-lg rounded-2xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105 group min-w-[200px]"
               >
                 {isSigningIn || isLoading ? (
                   <div className="flex items-center gap-2">
@@ -170,18 +171,18 @@ const Landing = () => {
                 )}
               </Button>
               
-              <div className="flex items-center gap-2 text-sm text-gray-400">
+              <div className="flex items-center gap-2 text-sm theme-text-muted">
                 <CheckCircle className="w-4 h-4 text-green-500" />
                 Free to start • No credit card required
               </div>
             </div>
 
             {/* Social Proof */}
-            <div className="flex items-center justify-center gap-8 text-sm text-gray-400">
+            <div className="flex items-center justify-center gap-8 text-sm theme-text-muted">
               <div className="flex items-center gap-2">
                 <div className="flex -space-x-2">
                   {[1, 2, 3, 4].map((i) => (
-                    <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 border-2 border-gray-800"></div>
+                    <div key={i} className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 border-2 border-white dark:border-gray-800"></div>
                   ))}
                 </div>
                 <span>10,000+ creators</span>
@@ -201,25 +202,25 @@ const Landing = () => {
         {/* Features Grid */}
         <section className="container mx-auto px-4 py-20">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            <h2 className="text-4xl font-bold mb-4 theme-text">
               Everything you need to create amazing content
             </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            <p className="text-xl theme-text-muted max-w-2xl mx-auto">
               Powerful features designed to make content creation effortless and engaging
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="bg-gray-800/50 border-gray-700/50 hover:bg-gray-800/70 transition-all duration-300 hover:scale-105 hover:shadow-2xl group backdrop-blur-sm">
+              <Card key={index} className="theme-card hover:shadow-xl transition-all duration-300 hover:scale-105 group backdrop-blur-sm">
                 <CardContent className="p-8">
                   <div className={`w-14 h-14 rounded-2xl bg-gradient-to-r ${feature.color} p-3 mb-6 group-hover:scale-110 transition-transform duration-300`}>
                     <feature.icon className="w-full h-full text-white" />
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-blue-300 transition-colors">
+                  <h3 className="text-xl font-semibold theme-text mb-3 group-hover:text-blue-600 transition-colors">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">
+                  <p className="theme-text-muted leading-relaxed group-hover:text-gray-700 dark:group-hover:text-gray-300 transition-colors">
                     {feature.description}
                   </p>
                 </CardContent>
@@ -231,19 +232,19 @@ const Landing = () => {
         {/* Testimonials */}
         <section className="container mx-auto px-4 py-20">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            <h2 className="text-4xl font-bold mb-4 theme-text">
               Loved by creators worldwide
             </h2>
-            <p className="text-xl text-gray-400">
+            <p className="text-xl theme-text-muted">
               See what our users are saying about Caption Genius
             </p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="bg-gray-800/50 border-gray-700/50 hover:bg-gray-800/70 transition-all duration-300 backdrop-blur-sm">
+              <Card key={index} className="theme-card hover:shadow-xl transition-all duration-300 backdrop-blur-sm">
                 <CardContent className="p-8">
-                  <p className="text-gray-300 mb-6 italic leading-relaxed">
+                  <p className="theme-text mb-6 italic leading-relaxed">
                     "{testimonial.content}"
                   </p>
                   <div className="flex items-center gap-4">
@@ -255,8 +256,8 @@ const Landing = () => {
                       />
                     </div>
                     <div>
-                      <h4 className="text-white font-semibold">{testimonial.name}</h4>
-                      <p className="text-gray-400 text-sm">{testimonial.role}</p>
+                      <h4 className="theme-text font-semibold">{testimonial.name}</h4>
+                      <p className="theme-text-muted text-sm">{testimonial.role}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -267,19 +268,19 @@ const Landing = () => {
 
         {/* CTA Section */}
         <section className="container mx-auto px-4 py-20">
-          <Card className="bg-gradient-to-r from-blue-900/50 to-purple-900/50 border-blue-500/30 backdrop-blur-sm">
+          <Card className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border-blue-500/30 backdrop-blur-sm theme-card">
             <CardContent className="p-12 text-center">
-              <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
+              <h2 className="text-4xl font-bold mb-4 theme-text">
                 Ready to transform your content?
               </h2>
-              <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+              <p className="text-xl theme-text-muted mb-8 max-w-2xl mx-auto">
                 Join thousands of creators who are already using Caption Genius to create engaging content that drives results.
               </p>
               <Button 
                 size="lg" 
                 onClick={handleSignIn}
                 disabled={isSigningIn || isLoading}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg rounded-2xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105"
+                className="theme-button-primary px-8 py-4 text-lg rounded-2xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:scale-105"
               >
                 Get Started for Free
                 <ArrowRight className="w-5 h-5 ml-2" />

@@ -12,7 +12,7 @@ All colors MUST be HSL.
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
 
-    --card: 0 0% 98%;
+    --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
 
     --popover: 0 0% 100%;
@@ -109,7 +109,7 @@ All colors MUST be HSL.
 
 @layer components {
   .glass-effect {
-    @apply bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border border-white/20 dark:border-gray-800/20;
+    @apply bg-white/90 dark:bg-gray-900/80 backdrop-blur-xl border border-gray-200/60 dark:border-gray-800/20;
   }
   
   .gradient-border {
@@ -120,7 +120,7 @@ All colors MUST be HSL.
 
   /* Light theme specific overrides */
   .light-theme-card {
-    @apply bg-white/95 dark:bg-white/5 border-gray-200/80 dark:border-white/20;
+    @apply bg-white/95 dark:bg-gray-900/80 border-gray-200/60 dark:border-gray-800/20 shadow-lg;
   }
   
   .light-theme-text {
@@ -128,10 +128,35 @@ All colors MUST be HSL.
   }
   
   .light-theme-text-muted {
-    @apply text-gray-600 dark:text-white/60;
+    @apply text-gray-600 dark:text-gray-400;
   }
   
   .light-theme-button {
-    @apply bg-blue-600 hover:bg-blue-700 dark:bg-gradient-to-r dark:from-blue-500 dark:via-purple-600 dark:to-pink-600 text-white;
+    @apply bg-blue-600 hover:bg-blue-700 dark:bg-gradient-to-r dark:from-blue-500 dark:via-purple-600 dark:to-pink-600 text-white font-medium;
+  }
+
+  /* Enhanced visibility for light theme */
+  .theme-card {
+    @apply bg-white dark:bg-gray-900/80 border border-gray-200 dark:border-gray-800/20 shadow-lg backdrop-blur-sm;
+  }
+
+  .theme-text {
+    @apply text-gray-900 dark:text-white;
+  }
+
+  .theme-text-muted {
+    @apply text-gray-600 dark:text-gray-400;
+  }
+
+  .theme-input {
+    @apply bg-white dark:bg-gray-900/50 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-white placeholder:text-gray-500 dark:placeholder:text-gray-400;
+  }
+
+  .theme-button-primary {
+    @apply bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white;
+  }
+
+  .theme-button-secondary {
+    @apply bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600;
   }
 }
