@@ -17,7 +17,7 @@ const ImageAnalysisCard = ({ originalImage, captionsCount, selectedCaption }: Im
   const navigate = useNavigate();
 
   const getEngagementColor = (score?: number) => {
-    if (!score) return 'text-gray-500';
+    if (!score) return 'text-gray-500 dark:text-gray-400';
     if (score >= 90) return 'text-green-600 dark:text-green-400';
     if (score >= 75) return 'text-blue-600 dark:text-blue-400';
     if (score >= 60) return 'text-yellow-600 dark:text-yellow-400';
@@ -37,26 +37,26 @@ const ImageAnalysisCard = ({ originalImage, captionsCount, selectedCaption }: Im
         <div className="p-4 space-y-4">
           <div className="flex items-center gap-2">
             <Wand2 className="h-4 w-4 text-blue-500" />
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+            <span className="text-sm font-medium text-gray-900 dark:text-gray-300">
               AI Analysis Complete
             </span>
           </div>
           
           <div className="space-y-2">
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600 dark:text-gray-400">Generated Variations</span>
+              <span className="text-gray-700 dark:text-gray-400">Generated Variations</span>
               <span className="font-medium text-gray-900 dark:text-white">{captionsCount}</span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-gray-600 dark:text-gray-400">Target Platform</span>
-              <Badge variant="outline" className="text-xs">
+              <span className="text-gray-700 dark:text-gray-400">Target Platform</span>
+              <Badge variant="outline" className="text-xs text-gray-900 dark:text-gray-300">
                 {selectedCaption?.platform || 'Instagram'}
               </Badge>
             </div>
             {selectedCaption?.engagement_score && (
               <div className="space-y-1">
                 <div className="flex justify-between text-sm">
-                  <span className="text-gray-600 dark:text-gray-400">Engagement Score</span>
+                  <span className="text-gray-700 dark:text-gray-400">Engagement Score</span>
                   <span className={`font-medium ${getEngagementColor(selectedCaption.engagement_score)}`}>
                     {selectedCaption.engagement_score}%
                   </span>
@@ -72,7 +72,7 @@ const ImageAnalysisCard = ({ originalImage, captionsCount, selectedCaption }: Im
           <Button 
             onClick={() => navigate('/dashboard')}
             variant="outline" 
-            className="w-full"
+            className="w-full text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700"
           >
             Create New Caption
           </Button>

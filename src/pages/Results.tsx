@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { CaptionResponse } from "@/services/realCaptionService";
 import ResultsHeader from "@/components/results/ResultsHeader";
@@ -47,7 +48,7 @@ const Results = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 relative">
+    <div className="min-h-screen cream-pink-gradient dark:bg-gray-900 relative">
       <DynamicBackground variant="results" />
       <div className="relative z-10 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
